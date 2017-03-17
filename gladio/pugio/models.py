@@ -49,31 +49,7 @@ class impuesto(models.Model):
    def __unicode__(self):
       return self.impuesto
 
-# clientes ----------------------------------------------------
-class cliente(models.Model):
-   nombre = models.CharField(max_length=100, null=False, blank=False)
-   apellidos = models.CharField(max_length=100, null=True, blank=True)
-   direccion =models.CharField(max_length=100, null=False, blank=False)
-   codigopostal = models.CharField(max_length=10, null=True, blank=True)
-   poblacion = models.ForeignKey(poblacion, default=None, null=False, blank=False)
-   provincia = models.ForeignKey(provincia, default=None, null=False, blank=False)
-   pais = models.CharField(max_length=25, default='Espana', null=True, blank=True)
-   cif = models.CharField(max_length=20, null=True, blank=True)
-   telefono = models.CharField(max_length=15, null=True, blank=True)
-   movil = models.CharField(max_length=15, null=True, blank=True)
-   fax = models.CharField(max_length=15, null=True, blank=True)
-   mail = models.EmailField(max_length=125, blank=True)
-   fecha_alta = models.DateField(default=datetime.now, blank=True)
-   baja = models.BooleanField(default=False, null=False)
-   fecha_baja = models.DateField(default=datetime.now, blank=True)   
-   
-   class Meta:
-      verbose_name_plural = "Clientes"
-      
-   def __unicode__(self):
-      return self.nombre
-
-#empresas ------------------------------------------------------            
+# empresas ----------------------------------------------------            
 class empresa(models.Model):
    razon_social = models.CharField(max_length=100, null=False, blank=False)
    cif = models.CharField(max_length=15, null=False, blank=False)
@@ -96,8 +72,57 @@ class empresa(models.Model):
    def __unicode__(self):
       return self.razon_social
 
-#departamento ----------------------------------------------------
+# sucursal ----------------------------------------------------
+class sucursal(models.Model):
+   empresa = models.ForeignKey(empresa, default=None, null=False, blank=False)
+   sucursal = models.CharField(max_length=50, default=None, null=False, blank=False)
+   direccion = models.CharField(max_length=100, null=False, blank=False)
+   codigopostal = models.CharField(max_length=10, null=True, blank=True)
+   poblacion = models.ForeignKey(poblacion, default=None, null=False, blank=False)
+   provincia = models.ForeignKey(provincia, default=None, null=False, blank=False)
+   pais = models.CharField(max_length=25, default='Espana', null=True, blank=True)
+   telefono = models.CharField(max_length=15, null=True, blank=True)
+   movil = models.CharField(max_length=15, null=True, blank=True)
+   fax = models.CharField(max_length=15, null=True, blank=True)
+   mail = models.EmailField(max_length=125, blank=True)
+   responsable = models.CharField(max_length=75, null=True, blank=True)
+   
+   class Meta:
+      verbose_name_plural = "Sucursales"
+      
+   def __unicode__(self):
+      return self.sucursal
+         
+# clientes ----------------------------------------------------
+class cliente(models.Model):
+   empresa = models.ForeignKey(empresa, default=None, null=False, blank=False)
+   sucursal = models.ForeignKey(sucursal, default=None, null=False, blank=False)
+   nombre = models.CharField(max_length=100, null=False, blank=False)
+   apellidos = models.CharField(max_length=100, null=True, blank=True)
+   direccion =models.CharField(max_length=100, null=False, blank=False)
+   codigopostal = models.CharField(max_length=10, null=True, blank=True)
+   poblacion = models.ForeignKey(poblacion, default=None, null=False, blank=False)
+   provincia = models.ForeignKey(provincia, default=None, null=False, blank=False)
+   pais = models.CharField(max_length=25, default='Espana', null=True, blank=True)
+   cif = models.CharField(max_length=20, null=True, blank=True)
+   telefono = models.CharField(max_length=15, null=True, blank=True)
+   movil = models.CharField(max_length=15, null=True, blank=True)
+   fax = models.CharField(max_length=15, null=True, blank=True)
+   mail = models.EmailField(max_length=125, blank=True)
+   fecha_alta = models.DateField(default=datetime.now, blank=True)
+   baja = models.BooleanField(default=False, null=False)
+   fecha_baja = models.DateField(default=datetime.now, blank=True)   
+   
+   class Meta:
+      verbose_name_plural = "Clientes"
+      
+   def __unicode__(self):
+      return self.nombre
+
+# departamento -------------------------------------------------
 class departamento(models.Model):
+   empresa = models.ForeignKey(empresa, default=None, null=False, blank=False)
+   sucursal = models.ForeignKey(sucursal, default=None, null=False, blank=False)
    departamento = models.CharField(max_length=75, null=False, blank=False)
    
    class Meta:
@@ -106,9 +131,10 @@ class departamento(models.Model):
    def __unicode__(self):
       return self.departamento
          
-#empleados -------------------------------------------------------
+# empleados -----------------------------------------------------
 class empleado(models.Model):
    empresa = models.ForeignKey(empresa, default=None, null=False, blank=False)
+   sucursal = models.ForeignKey(sucursal, default=None, null=False, blank=False)
    nombre = models.CharField(max_length=75, null=False, blank=False)
    apellidos = models.CharField(max_length=75, null=False, blank=False)
    direccion = models.CharField(max_length=150, null=False, blank=False)
