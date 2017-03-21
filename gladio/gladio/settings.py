@@ -25,7 +25,7 @@ SECRET_KEY = '=zg$rbm=$^2=n0=w3q6ys^sq_bfzyzktn(-9p9iv0x@azspv08'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.1.1.8', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'gladio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [(os.path.join(BASE_DIR, './templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
