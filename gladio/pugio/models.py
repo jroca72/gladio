@@ -149,6 +149,9 @@ class empleado(models.Model):
    nif = models.CharField(max_length=15, null=False, blank=False)   
    nss = models.CharField(max_length=50, null=False, blank=False)   
    departamento = models.ForeignKey(departamento, default=None, null=False, blank=None)
+   fecha_alta = models.DateField(default=datetime.now, blank=True)
+   baja = models.BooleanField(default=False, null=False, blank=True)
+   fecha_baja = models.DateField(default=datetime.now, blank=True) 
    
    class Meta:
       verbose_name_plural = "Empleados"
@@ -156,4 +159,63 @@ class empleado(models.Model):
    def __unicode__(self):
       return self.nombre
 
-         
+# pago -------------------------------------------------------------
+class pago(models.Model):
+   nombre = models.CharField(max_length=50, default=None, null=False, blank=False)
+   dia_1 = models.PositiveIntegerField(null=True, blank=True)      
+   dia_2 = models.PositiveIntegerField(null=True, blank=True)
+   dia_3 = models.PositiveIntegerField(null=True, blank=True)
+   dia_4 = models.PositiveIntegerField(null=True, blank=True)
+   dia_5 = models.PositiveIntegerField(null=True, blank=True)
+   dia_6 = models.PositiveIntegerField(null=True, blank=True)
+   
+   class Meta:
+      verbose_name_plural = "Pagos"
+      
+   def __unicode__(self):
+      return self.nombre
+
+# proveedor ---------------------------------------------------------
+class proveedor(models.Model):
+   empresa = models.ForeignKey(empresa, default=None, null=False, blank=False)
+   razon_social = models.CharField(max_length=100, default=None, null=False, blank=False)
+   cif = models.CharField(max_length=15, null=False, blank=False)
+   direccion_social = models.CharField(max_length=150, null=False, blank=False)
+   provincia_social = models.ForeignKey(provincia, default=None, null=False, blank=False)
+   poblacion_social = models.ForeignKey(poblacion, default=None, null=False, blank=False)
+   cp_social = models.CharField(max_length=10, null=True, blank=True)
+   pais_social = models.CharField(max_length=50, default='Espana', null=True, blank=True)
+   telefono_social = models.CharField(max_length=15, null=True, blank=True)
+   movil_social = models.CharField(max_length=15, null=True, blank=True)
+   fax_social = models.CharField(max_length=15, null=True, blank=True)
+   mail_social = models.EmailField(max_length=125, blank=True)
+   web = models.URLField(max_length=150, blank=True)
+   logotipo = models.ImageField(upload_to='imagenes', blank=True)
+   nombre_comercial = models.CharField(max_length=100, null=False, blank=False) 
+   direccion_comercial = models.CharField(max_length=150, null=False, blank=False)
+   provincia_comercial = models.ForeignKey(provincia, related_name='provincia_c', default=None, null=False, blank=False)
+   poblacion_comercial = models.ForeignKey(poblacion, related_name='poblacion_c', default=None, null=False, blank=False)
+   cp_comercial = models.CharField(max_length=10, null=True, blank=True)
+   pais_comercial = models.CharField(max_length=50, default='Espana', null=True, blank=True)
+   telefono_comercial = models.CharField(max_length=15, null=True, blank=True)
+   movil_comercial = models.CharField(max_length=15, null=True, blank=True)
+   fax_comercial = models.CharField(max_length=15, null=True, blank=True)
+   mail_comercial = models.EmailField(max_length=125, blank=True)
+   portal = models.URLField(max_length=150, blank=True)
+   fecha_alta = models.DateField(default=datetime.now, blank=True)
+   baja = models.BooleanField(default=False, null=False)
+   fecha_baja = models.DateField(default=datetime.now, blank=True) 
+   persona_contacto = models.CharField(max_length=50, null=True, blank=True)
+   telefono_contacto = models.CharField(max_length=15, null=True, blank=True)
+   mail_contacto = models.EmailField(max_length=125, blank=True)   
+   observaciones = models.CharField(max_length=255, null=True, blank=True)
+   pago = models.ForeignKey(pago, default=None, null=False, blank=False)
+   impuesto = models.ForeignKey(impuesto, default=None, null=False, blank=False)
+   
+   class Meta:
+      verbose_name_plural = "Proveedores"
+      
+   def __unicode__(self):
+      return self.razon_social
+
+      
