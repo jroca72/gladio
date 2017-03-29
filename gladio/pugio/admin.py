@@ -1,6 +1,7 @@
 from django.contrib import admin
 from pugio.models import provincia, poblacion, moneda, impuesto, empresa, sucursal
-from pugio.models import cliente, departamento, empleado, pago, proveedor
+from pugio.models import cliente, departamento, empleado, pago, proveedor, familia, subfamilia
+
 # Register your models here.
 class PoblacionAdmin(admin.ModelAdmin):
    list_display = ('poblacion', 'provincia')
@@ -22,7 +23,14 @@ class DepartamentoAdmin(admin.ModelAdmin):
 
 class SucursalAdmin(admin.ModelAdmin):
    list_display = ('empresa', 'sucursal')
-      
+
+class FamiliaAdmin(admin.ModelAdmin):
+	list_display = ('letra', 'nombre')
+
+class SubfamiliaAdmin(admin.ModelAdmin):
+	list_display = ('familia','letra', 'nombre')
+	ordering = ('familia', 'letra')
+   	      
 admin.site.register(provincia)
 admin.site.register(poblacion, PoblacionAdmin)
 admin.site.register(moneda)
@@ -34,5 +42,6 @@ admin.site.register(departamento, DepartamentoAdmin)
 admin.site.register(empleado, EmpleadoAdmin)
 admin.site.register(pago)
 admin.site.register(proveedor)
-
+admin.site.register(familia, FamiliaAdmin)
+admin.site.register(subfamilia, SubfamiliaAdmin)
 
