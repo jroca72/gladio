@@ -231,13 +231,13 @@ class familia(models.Model):
 
 # subfamilia ------------------------------------------------------
 class subfamilia(models.Model):
-	letra = models.CharField(max_length=2, null=False, blank=False)      
+	letra = models.CharField(max_length=2, null=False, blank=False)
 	familia = models.ForeignKey(familia, default= None, null=False, blank=False)
 	nombre = models.CharField(max_length=70, null=False, blank=False)
-	
+
 	class Meta:
 		verbose_name_plural = "SubFamilias"
-	
+
 	def __unicode__(self):
 		return self.nombre
 
@@ -250,16 +250,16 @@ class condicion_compra(models.Model):
 	descuento_2 = models.DecimalField(default = 0, max_digits=5, decimal_places=2)
 	descuento_3 = models.DecimalField(default = 0, max_digits=5, decimal_places=2)
 	descuento_4 = models.DecimalField(default = 0, max_digits=5, decimal_places=2)
-	descuento_5 = models.DecimalField(default = 0, max_digits=5, decimal_places=2)			
+	descuento_5 = models.DecimalField(default = 0, max_digits=5, decimal_places=2)
 	cargo_1 = models.DecimalField(default = 0, max_digits=5, decimal_places=2)
 	cargo_2 = models.DecimalField(default = 0, max_digits=5, decimal_places=2)
-	cargo_3 = models.DecimalField(default = 0, max_digits=5, decimal_places=2)		
+	cargo_3 = models.DecimalField(default = 0, max_digits=5, decimal_places=2)
 	fecha_alta = models.DateField(default=datetime.now, blank=True)
 	baja = models.BooleanField(default=False, null=False)
 	fecha_baja = models.DateField(default=datetime.now, blank=True)
 
 	class Meta:
-		verbose_name_plural = "Condiciones de compra"	  
+		verbose_name_plural = "Condiciones de compra"
 
 	def __unicode__(self):
 		return self.nombre
@@ -267,12 +267,12 @@ class condicion_compra(models.Model):
 # condicion_marcaje ---------------------------------------------------
 class condicion_marcaje(models.Model):
    proveedor = models.ForeignKey(proveedor, default = None, null = False, blank = False)
-   nombre = models.CharField(max_length=50, null = False, blank = False)	      	
+   nombre = models.CharField(max_length=50, null = False, blank = False)
    margen = models.DecimalField(default = 0, max_digits=5, decimal_places=2)
-   descuento = models.DecimalField(default = 0, max_digits=5, decimal_places=2)		
+   descuento = models.DecimalField(default = 0, max_digits=5, decimal_places=2)
    fecha_alta = models.DateField(default=datetime.now, blank=True)
    baja = models.BooleanField(default=False, null=False)
-   fecha_baja = models.DateField(default=datetime.now, blank=True)   
+   fecha_baja = models.DateField(default=datetime.now, blank=True)
    impuesto = models.ForeignKey(impuesto, default = None, null = False, blank = False)
 
    class Meta:
@@ -285,16 +285,37 @@ class condicion_marcaje(models.Model):
 class catalogo(models.Model):
    nombre = models.CharField(max_length=70, default= None, null = False, blank = False)
    proveedor = models.ForeignKey(proveedor, default = None, null = False, blank = False)
-   condicion_compra = models.ForeignKey(condicion_compra, default = None, null = False, blank = False)	
-   condicion_marcaje = models.ForeignKey(condicion_marcaje, default = None, null = False, blank = False)	   
+   condicion_compra = models.ForeignKey(condicion_compra, default = None, null = False, blank = False)
+   condicion_marcaje = models.ForeignKey(condicion_marcaje, default = None, null = False, blank = False)
    fecha_alta = models.DateField(default=datetime.now, blank=True)
    baja = models.BooleanField(default=False, null=False)
    fecha_baja = models.DateField(default=datetime.now, blank=True)
 
    class Meta:
       verbose_name_plural = "Catalogos"
-    
+
    def __unicode__(self):
       return self.nombre
 
+# articulo -------------------------------------------------------------
+class articulo(models.Model):
+	proveedor = models.ForeignKey(proveedor, null = False, blank= False)
+	catalogo = models.ForeignKey(catalogo, null = False, blank = False)
+	nombre = models.CharField(max_length=75, null = False, blank = False)
+	ean = models.CharField(max_length = 23, null = True, blank = True)
+	referencia = models.CharField(max_length=25, null = False, blank = False)
+	ancho = models.DecimalField(default = 0, max_digits = 5, decimal_places = 2)
+	fondo = models.DecimalField(default = 0, max_digits = 5, decimal_places = 2)
+	alto = models.DecimalField(default = 0, max_digits = 5, decimal_places = 2)
+	peso = models.DecimalField(default = 0, max_digits = 5, decimal_places = 2)
+	volumen = models.DecimalField(default = 0, max_digits = 5, decimal_places = 2)
+	precio_compra = models.DecimalField(default = 0, max_digits = 5, decimal_places = 2)
+	ultimo_costo = models.DecimalField(default = 0, max_digits = 5, decimal_places = 2)
+	fecha_alta = models.DateField(default=datetime.now, blank=True)
+	baja = models.BooleanField(default=False, null=False)
+	fecha_baja = models.DateField(default=datetime.now, blank=True)
 
+	class Meta:
+		verbose_name_plural = "Articulos"
+	def __unicode__(self):
+		return self.nombre

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from pugio.models import provincia, poblacion, moneda, impuesto, empresa, sucursal
 from pugio.models import cliente, departamento, empleado, pago, proveedor, familia, subfamilia
-from pugio.models import condicion_compra, condicion_marcaje, catalogo
+from pugio.models import condicion_compra, condicion_marcaje, catalogo, articulo
 
 # Register your models here.
 class PoblacionAdmin(admin.ModelAdmin):
@@ -20,7 +20,7 @@ class EmpleadoAdmin(admin.ModelAdmin):
    list_filter = ('departamento',)
 
 class DepartamentoAdmin(admin.ModelAdmin):
-   list_display = ('empresa', 'sucursal', 'departamento')   
+   list_display = ('empresa', 'sucursal', 'departamento')
 
 class SucursalAdmin(admin.ModelAdmin):
    list_display = ('empresa', 'sucursal')
@@ -38,12 +38,12 @@ class Condicion_compraAdmin(admin.ModelAdmin):
 
 class Condicion_marcajeAdmin(admin.ModelAdmin):
 	list_display = ('proveedor', 'nombre')
-	ordering = ('proveedor', 'nombre')	
+	ordering = ('proveedor', 'nombre')
 
 class CatalogoAdmin(admin.ModelAdmin):
 	list_display = ('proveedor', 'nombre')
-	ordering = ('proveedor', 'nombre')   	      
-	
+	ordering = ('proveedor', 'nombre')
+
 admin.site.register(provincia)
 admin.site.register(poblacion, PoblacionAdmin)
 admin.site.register(moneda)
@@ -60,5 +60,4 @@ admin.site.register(subfamilia, SubfamiliaAdmin)
 admin.site.register(condicion_compra, Condicion_compraAdmin)
 admin.site.register(condicion_marcaje, Condicion_marcajeAdmin)
 admin.site.register(catalogo, CatalogoAdmin)
-
-
+admin.site.register(articulo)
