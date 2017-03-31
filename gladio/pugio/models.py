@@ -317,5 +317,29 @@ class articulo(models.Model):
 
 	class Meta:
 		verbose_name_plural = "Articulos"
+
 	def __unicode__(self):
 		return self.nombre
+		
+# almacen ----------------------------------------------------------------
+class almacen(models.Model):
+   empresa = models.ForeignKey(empresa, null = False, blank = False)
+   nombre = models.CharField(max_length = 50, null = False, blank = False)
+   direccion = models.CharField(max_length=150, default = ' ', null = False, blank = False)
+   provincia = models.ForeignKey(provincia, null = False, blank = False)
+   poblacion = models.ForeignKey(poblacion, null = False, blank = False)
+   cp = models.CharField(max_length = 10, null = True, blank = True)
+   pais = models.CharField(max_length = 50, default = 'espana', null = True, blank = True)
+   telefono = models.CharField(max_length = 15, null = True, blank = True)
+   movil = models.CharField(max_length = 15, null = True, blank = True)
+   fax = models.CharField(max_length = 15, null = True, blank = True)
+   correo = models.EmailField(max_length = 125, blank = True)
+   responsable = models.CharField(max_length= 50, blank = True)
+   exposicion = models.BooleanField(default = False, null = False, blank = False)
+   
+   class Meta:
+      verbose_name_plural = "Almacenes"
+        
+   def __unicode__(self):
+      return self.nombre
+         		
