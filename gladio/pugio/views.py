@@ -5,6 +5,7 @@ from django.template import RequestContext
 from datetime import datetime, timedelta
 from django.utils import timezone
 from django.views.generic import ListView, DetailView
+from pugio.models import provincia
 
 # vistas -----------------------------------------------------
 def home(request):
@@ -12,4 +13,8 @@ def home(request):
 
 def masters(request):
 	return render(request, 'pugio/masters.html')
-	
+
+class ListaProvincia(ListView):
+    queryset = provincia.objects.order_by('numero')
+    context_object_name = 'provincia'
+    paginate_by = 10

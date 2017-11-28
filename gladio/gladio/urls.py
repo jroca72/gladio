@@ -19,12 +19,13 @@ from django.views.static import serve
 from django.contrib import admin
 from django.conf import settings
 from pugio import views
-from pugio.views import home, masters
+from pugio.views import home, masters, ListaProvincia
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
     url(r'^masters/', views.masters, name='masters'),
+    url(r'^provincia/',ListaProvincia.as_view(), name = 'ListaProvincia'),
 ]
 
 if settings.DEBUG:

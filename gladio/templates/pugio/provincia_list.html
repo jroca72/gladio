@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{%   load   staticfiles   %}
+
+{% block elcss %}
+{% endblock %}
+{% block titulo %} Maestros/Provincias {% endblock %}
+{% block content %}
+<row>
+	<div class="col-md-2">
+		<a href="#" class="btn btn-default btn-lg btn-block">Añadir</a>
+		<a href="#" class="btn btn-primary btn-lg btn-block">Buscar</a>
+		<br /><br /><br />
+    </div>
+    <div class="col-md-10" >
+			<div class="panel panel-default">
+			<div class="panel-heading">Provincias</div>
+			<div class ="panel-body">
+				{% if object_list %}
+				<div class="table-responsive">
+				<table class="table table-striped">
+					<th>Detalle</th>
+					<th>Numero</th>
+					<th>Provincia</th>
+					{% for provincia  in object_list %}
+						<tr>
+							<td><a href="#" class="btn btn-primary btn-xs">Detalle</a></td>
+							<td>{{ provincia.numero}}</td>
+							<td>{{ provincia.provincia }}</td>
+					{% endfor %}
+				  </table>
+				</div>
+		    {% else %}
+        	<p class="text-warning">No hay provincias registradas.</p>
+        {% endif %}
+			</div>
+		</div>
+    </div>
+</row>
+<!-- paginado -->
+<row>
+	<div class="col-md-9 col-md-offset-3">
+		<nav>
+			<ul class="pager">
+				{% if page_obj.has_previous %}
+				<li class="previus"><a href="?page={{ page_obj.previous_page_number }}"><spam aria-hideen="true">&larr;</spam>Anterior</a></li>
+				{%endif%}
+				<li> Pagina {{ page_obj.number }} de {{ paginator.num_pages }}.</li>
+				{% if page_obj.has_next %}
+				<li class="next"><a href="?page={{ page_obj.next_page_number }}">Siguiente<spam aria-hideen="true">&rarr;</spam></a></li>
+				{%endif%}
+			</ul>
+		</nav>
+	</div>
+</row>
+{% endblock %}
