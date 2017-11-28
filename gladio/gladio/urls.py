@@ -19,11 +19,12 @@ from django.views.static import serve
 from django.contrib import admin
 from django.conf import settings
 from pugio import views
-from pugio.views import home
+from pugio.views import home, masters
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
+    url(r'^masters/', views.masters, name='masters'),
 ]
 
 if settings.DEBUG:

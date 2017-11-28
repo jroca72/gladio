@@ -9,5 +9,7 @@ from django.views.generic import ListView, DetailView
 # vistas -----------------------------------------------------
 def home(request):
 	return render(request, 'pugio/home.html')
-	
+
+def masters(request):
+	return render(request, 'pugio/masters.html')
 	
