@@ -1,25 +1,11 @@
-"""gladio URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.10/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.contrib import admin
 from django.conf import settings
 from pugio import views
-from pugio.views import home, masters, ListaProvincia, ListaImpuesto 
+from pugio.views import home, masters
+from pugio.views import ListaProvincia, ListaImpuesto, ListaPoblacion, ListaMoneda, ListaEmpresa
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,6 +13,9 @@ urlpatterns = [
     url(r'^masters/', views.masters, name='masters'),
     url(r'^provincia/',ListaProvincia.as_view(), name = 'ListaProvincia'),
     url(r'^impuesto/',ListaImpuesto.as_view(), name = 'ListaImpuesto'),
+    url(r'^poblacion/',ListaPoblacion.as_view(), name = 'ListaPoblacion'),
+    url(r'^moneda/',ListaMoneda.as_view(), name = 'ListaMoneda'),
+    url(r'^empresa/',ListaEmpresa.as_view(), name = 'ListaEmpresa'),
 ]
 
 if settings.DEBUG:
