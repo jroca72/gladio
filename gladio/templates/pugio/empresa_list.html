@@ -24,7 +24,7 @@
 					<th>Nombre C.</th>
 					{% for empresa in object_list %}
 						<tr>
-							<td><a href="#" class="btn btn-primary btn-xs">Detalle</a></td>
+							<td><a href="/empresa_detalle/{{empresa.id}}/" class="btn btn-primary btn-xs">Detalle</a></td>
 							<td>{{ empresa.razon_social}}</td>
 							<td>{{ empresa.cif }}</td>
 							<td>{{ empresa.nombre_comercial }}</td>

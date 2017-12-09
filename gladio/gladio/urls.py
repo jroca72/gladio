@@ -6,7 +6,7 @@ from django.conf import settings
 from pugio import views
 from pugio.views import home, masters
 from pugio.views import ListaProvincia, ListaImpuesto, ListaPoblacion, ListaMoneda, ListaEmpresa
-from pugio.views import ListaSucursal
+from pugio.views import ListaSucursal, DetalleEmpresa
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^moneda/',ListaMoneda.as_view(), name = 'ListaMoneda'),
     url(r'^empresa/',ListaEmpresa.as_view(), name = 'ListaEmpresa'),
     url(r'^sucursal/',ListaSucursal.as_view(), name = 'ListaSucrusal'),
+    url(r'^empresa_detalle/(?P<pk>[0-9]+)/$', DetalleEmpresa.as_view(), name = 'empresa_detalle'),
 ]
 
 if settings.DEBUG:
