@@ -6,34 +6,11 @@
 {% block titulo %} Maestros/Empresas/Detalle {% endblock %}
 {% block content %}
 <row>
-	<div class="col-md-3">
+	<div class="col-md-2">
 
 	</div>
-	<div class="col-md-9">
-		<div class="thumbnail">
-0			<br/><br />
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Datos de la Empresa
-				</div>
-				<div class="panel-body">
-					  <div class="table-responsive">
-						<table class="table table-striped">
-						<th>Razon</th>
-						<th>Dirección</th>
-						<th>provincia</th>
-						<th>Población</th>
-						<tr>
-							<td>{{ empresa.razon_social | capfirst}}</td>
-							<td>{{ empresa.direccion_social | capfirst}}</td>
-							<td>{{ provincia.provincia }}</td>
-							<td>{{ poblacion.poblacion }}</td>
-						</tr>
-					  </table>
-					  </div>
-			  </div>
-			</div>
-		</div>
+	<div class="col-md-10">
+		<p><stron>Empresa: </strong>{{ empresa.razon_social | capfirst }}
 	</div>
 </row>
 {% endblock %}
